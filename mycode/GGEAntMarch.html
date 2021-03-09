@@ -115,13 +115,16 @@
                   [rectBox.x, rectBox.y + rectBox.height - deltaY],
                   [rectBox.x, rectBox.y - deltaY]]
                   
-                var speed = 50
+                var speed = Math.floor(ggeData[i].GGEPC*3.5)
                 // var space = ggeData[i].GGE/ggeData[i].GGEPC 
-                var space = 30
-                var color = '#F9DEB3'            
+                var population = Math.floor(ggeData[i].GGE/ggeData[i].GGEPC)
+                var space = Math.floor(300/population)
+                var color = '#F9DEB3'     
+                document.write(speed)
+                document.write(" ")       
                 marchingAnt(visual_proxy, path, boundary, speed, space, color)
-            })
-            MA_End();
+          })
+        MA_End();
 
     </script>
    
