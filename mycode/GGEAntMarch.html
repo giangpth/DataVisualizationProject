@@ -50,6 +50,30 @@
         fill: none;
         stroke: steelblue;
       }
+
+      .rotate {
+
+        transform: rotate(-90deg);
+
+
+        /* Legacy vendor prefixes that you probably don't need... */
+
+        /* Safari */
+        -webkit-transform: rotate(-90deg);
+
+        /* Firefox */
+        -moz-transform: rotate(-90deg);
+
+        /* IE */
+        -ms-transform: rotate(-90deg);
+
+        /* Opera */
+        -o-transform: rotate(-90deg);
+
+        /* Internet Explorer */
+        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+      }
       
       </style>
 
@@ -119,9 +143,7 @@
                 // var space = ggeData[i].GGE/ggeData[i].GGEPC 
                 var population = Math.floor(ggeData[i].GGE/ggeData[i].GGEPC)
                 var space = Math.floor(300/population)
-                var color = '#F9DEB3'     
-                document.write(speed)
-                document.write(" ")       
+                var color = '#F9DEB3'        
                 marchingAnt(visual_proxy, path, boundary, speed, space, color)
           })
         MA_End();

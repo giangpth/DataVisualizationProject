@@ -72,6 +72,28 @@ function drawGGEChart(ggeData)
         .attr("transform", "translate(" + width + " ,0)")
         .call(z_axis)
 
+    chart.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", width/2)
+        .attr("y", height + margin)
+        .text("Country");
+
+    var wpadright = width + 30;
+    chart.append('g')
+        .attr('transform', 'translate(' + wpadright + ', ' + height/2 + ')')
+        .append('text')
+        .attr('text-anchor', 'middle')
+        .attr('transform', 'rotate(90)')
+        .text('Greenhouse gas emission per capital')
+
+    chart.append('g')
+        .attr('transform', 'translate(' + -40 + ', ' + height/2 + ')')
+        .append('text')
+        .attr('text-anchor', 'middle')
+        .attr('transform', 'rotate(-90)')
+        .text('Greenhouse gas emission')
+
+
     chart.selectAll()
         .data(ggeData)
         .enter()
