@@ -34,6 +34,15 @@ function drawGGEChart(ggeData)
                 // .attr("width", width)
                 // .attr("height", height);
     //the chart svg
+    var title = barsvg.append('g')
+
+    title.append("text")
+    .attr("text-anchor", "begin")
+    .attr("x", width/2 - margin*2)
+    .attr("y", 20)
+    .style("font-size", "28px")
+    .text("Greenhouse gas emission 2018");
+
     var chart = barsvg.append('g')
                         .attr('transform', `translate(${margin}, ${margin})`);
 
@@ -61,6 +70,7 @@ function drawGGEChart(ggeData)
 
     
 
+    //add y axis 
     chart.append("g")
             .attr('class', 'x_axis')
             .attr('transform', `translate(0, ${height})`)
@@ -68,16 +78,19 @@ function drawGGEChart(ggeData)
     chart.append('g')
         .call(y_axis)
     
+    //add z axis 
     chart.append('g')
         .attr("transform", "translate(" + width + " ,0)")
         .call(z_axis)
 
+    //add axis label for x axis 
     chart.append("text")
         .attr("text-anchor", "middle")
         .attr("x", width/2)
         .attr("y", height + margin)
         .text("Country");
 
+    //add axis label for z axis 
     var wpadright = width + 30;
     chart.append('g')
         .attr('transform', 'translate(' + wpadright + ', ' + height/2 + ')')
@@ -86,6 +99,7 @@ function drawGGEChart(ggeData)
         .attr('transform', 'rotate(90)')
         .text('Greenhouse gas emission per capital')
 
+    // add axis label for y axis 
     chart.append('g')
         .attr('transform', 'translate(' + -40 + ', ' + height/2 + ')')
         .append('text')
@@ -94,6 +108,7 @@ function drawGGEChart(ggeData)
         .text('Greenhouse gas emission')
 
 
+    // add bars to the chart
     chart.selectAll()
         .data(ggeData)
         .enter()
@@ -104,16 +119,40 @@ function drawGGEChart(ggeData)
         .attr('width', xScale.bandwidth())
         .style('fill', '#fc9d62')
     
+    // feed the data to the line chart 
     var line = d3.line()
         .x(function(d, i) { return xScale(d.Country) + xScale.bandwidth() / 2; })
         .y(function(d) { return zScale(d.GGEPC); })
         .curve(d3.curveMonotoneX);
 
-
+    //add line to the chart 
     chart.append("path")
         .attr("class", "line") // Assign a class for styling
         .attr("d", line(ggeData));
     
+    // // add legend 
+    chart.append('circle')
+        .style("fill", "#fc9d62")
+        .attr("r", 10)
+        .attr("cx", 250)
+        .attr("cy", 10);
     
-  
+    chart.append("text")
+        .attr("text-anchor", "begin")
+        .attr("x", 250 + 20)
+        .attr("y", 15)
+        .text("Greenhouse gas emission");
+
+    chart.append('circle')
+        .style("fill", "#8da0cb")
+        .attr("r", 10)
+        .attr("cx", 250)
+        .attr("cy", 40);
+    
+    chart.append("text")
+        .attr("text-anchor", "begin")
+        .attr("x", 250 + 20)
+        .attr("y", 45)
+        .text("Greenhouse gas emission per capital");
+    
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <!-- 1. Download V4 version of D3-->
+        <script src = "../../lib/d3.js"></script>
+        <script src = "../../lib/fisheye.js"></script>
+        <script src = "../../src/gd.js"></script>
+    </head>
+    <style>
+        circle {
+          fill: cadetblue;
+        }
+        line {
+          stroke: #ccc;
+        }
+        text {
+          text-anchor: middle;
+          font-family: "Helvetica Neue", Helvetica, sans-serif;
+          fill: #666;
+          font-size: 16px;
+        }
+    </style>
+    <body>
+        <script type="text/javascript" src="k56cadata.js"></script>
+        <div id = "mydiv">
+            <svg id = "mysvg" width = '1200' height = "1200">
+                <g class="links"></g>
+                <g class="nodes"></g>
+            </svg>
+        </div>
+        <script type="text/javascript" src="drawNetwork.js"></script>
+        <script>
+            drawNetwork(nodes, links)
+        </script>
+    </body>
+
+</html>
