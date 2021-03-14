@@ -19,22 +19,22 @@ var nodes =
       "Name": "Trung Anh"
     },
     {
-      "Name": "Khac Quan "
+      "Name": "Khac Quan"
     },
     {
-      "Name": "Luyen "
+      "Name": "Luyen"
     },
     {
-      "Name": "Vu Minh Hai "
+      "Name": "Vu Minh Hai"
     },
     {
-      "Name": "Muoi Tran "
+      "Name": "Muoi Tran"
     },
     {
-      "Name": "Nam Duong "
+      "Name": "Nam Duong"
     },
     {
-      "Name": "Bao Trung "
+      "Name": "Bao Trung"
     },
     {
       "Name": "Ngo Dinh Nguyen"
@@ -43,58 +43,58 @@ var nodes =
       "Name": "Hoang Anh"
     },
     {
-      "Name": "Hung Thinh "
+      "Name": "Hung Thinh"
     },
     {
-      "Name": "Truong Thinh "
+      "Name": "Truong Thinh"
     },
     {
-      "Name": "Nguyen Van Dai "
+      "Name": "Nguyen Van Dai"
     },
     {
       "Name": "Phan Thanh"
     },
     {
-      "Name": "Ngo Minh Son "
+      "Name": "Ngo Minh Son"
     },
     {
-      "Name": "Nguyen Minh Thuan "
+      "Name": "Nguyen Minh Thuan"
     },
     {
-      "Name": "Tuan Anh Hoang Cong "
+      "Name": "Tuan Anh Hoang Cong"
     },
     {
-      "Name": "Tuan Anh Nguyen "
+      "Name": "Tuan Anh Nguyen"
     },
     {
-      "Name": "Vi Tat Thang "
+      "Name": "Vi Tat Thang"
     },
     {
-      "Name": "Vo Anh Hung "
+      "Name": "Vo Anh Hung"
     },
     {
-      "Name": "Van Vuong "
+      "Name": "Van Vuong"
     },
     {
       "Name": "Yen Vu"
     },
     {
-      "Name": "Dang Minh Cong "
+      "Name": "Dang Minh Cong"
     },
     {
-      "Name": "Nguyen Dinh Dung "
+      "Name": "Nguyen Dinh Dung"
     },
     {
-      "Name": "Hua Viet Ngoc "
+      "Name": "Hua Viet Ngoc"
     },
     {
       "Name": "Nguyen Thanh Toan"
     },
     {
-      "Name": "Pham Tat Dat "
+      "Name": "Pham Tat Dat"
     },
     {
-      "Name": "Bui Thanh Son "
+      "Name": "Bui Thanh Son"
     },
     {
       "Name": "Vu Tien Dat"
