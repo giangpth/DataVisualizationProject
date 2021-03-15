@@ -25,7 +25,7 @@ function drawNetwork(nodes, links)
     var height = chartsvg.node().getBoundingClientRect().height
        
     var simulation = d3.forceSimulation(nodes)
-        .force('charge', d3.forceManyBody().strength(-3000))
+        .force('charge', d3.forceManyBody().strength(-3500))
         .force('center', d3.forceCenter(width / 3, height / 2))
         .force('link', d3.forceLink().links(links))
         .on('tick', ticked);
@@ -49,13 +49,17 @@ function drawNetwork(nodes, links)
                         .enter()
                         .append('g')
 
+
     var circle = block.append('circle')
                 .attr('r', 30)
                 .attr('id', function(d){return d.Name.replace(/ /g,'')})
-    
+
+
     var lable = block.append('text')
         .attr('text-anchor', "start")
         .text(function(d){return d.Name})
+    
+
 
     function ticked()
     {
@@ -64,7 +68,7 @@ function drawNetwork(nodes, links)
             .attr("y", function(d) { return d.y; });
         circle
             .attr("cx", function(d) { return d.x; })
-            .attr("cy", function(d) { return d.y; });
+            .attr("cy", function(d) { return d.y; })
         lable
             .attr('dx', function(d) {return d.x})
             .attr('dy', function(d) {return d.y})
@@ -74,16 +78,53 @@ function drawNetwork(nodes, links)
             .attr("y1", function(d) { return d.source.y; })
             .attr("x2", function(d) { return d.target.x; })
             .attr("y2", function(d) { return d.target.y; })
-            // .attr("id", function(d){
-            //     // document.write(d.source.Name.replace(/ /g,'') + d.target.Name.replace(/ /g,''))
-            //     return d.source.Name.replace(/ /g,'') + d.target.Name.replace(/ /g,'');
-            // })
+        // document.write('tick ')
     }    
-    // var selected = d3.select("#HoangAnh").style('fill', 'red') 
-    var giang = d3.select("#Giang").attr('r', 40) 
-    var cong = d3.select("#DangMinhCong").attr('r', 40) 
-    var nguyen = d3.select("#NgoDinhNguyen").attr('r', 40) 
-    var quan = d3.select("#KhacQuan").attr('r', 40) 
-    var thinh = d3.select("#HungThinh").attr('r', 40) 
+    // simulation.stop()
+    // simulation.tick()
+    // var selected = d3.select(["#HoangAnh").style('fill', 'red') 
+    // var giang = d3.select("#Giang").attr('r', 40) 
+    // var cong = d3.select("#DangMinhCong").attr('r', 40) 
+    // var nguyen = d3.select("#NgoDinhNguyen").attr('r', 40) 
+    // var quan = d3.select("#KhacQuan").attr('r', 40) 
+    // var thinh = d3.select("#HungThinh").attr('r', 40) 
 
+    d3.transition()
+        .delay(10000)
+        .on('start', repeat)
+    
+   
+    function repeat()
+    {
+        // document.write('Repeat')
+        for (var i = 0; i < groups.length; i++)
+        {
+            var num = groups[i].Number
+            // document.write(num)
+            for (var j = 0; j < num; j++)
+            {
+                var memname = groups[i].Mem[j];
+                var memtag = "#"
+                memtag += memname.replace(/ /g,'')
+                d3.select(memtag)
+                    .transition()
+                    .duration(1500)
+                    .delay((i)*5000)
+                    .attr('r', 60)
+        
+                d3.select(memtag)
+                    .transition()
+                    .duration(2000)
+                    .delay((i)*5000 + 1500)
+                    .attr('r', 30)
+                       
+            }
+            if (i == groups.length - 1)
+            {
+                d3.transition()
+                    .delay(5000*groups.length)
+                    .on('end', repeat)
+            }
+        }
+    }
 }

@@ -567,3 +567,33 @@ var links =
       "target": 14
     }
    ]
+
+var groups = 
+[
+    {
+        "id": 0, 
+        "Number": 3,
+        "Mem": ['Giang', 'Ngo Dinh Nguyen', 'Trung Anh']
+    }, 
+    {
+        "id": 1, 
+        "Number": 2,
+        "Mem": ['Giang', 'Dang Minh Cong']
+    }, 
+    {
+        "id": 2, 
+        "Number": 5,
+        "Mem": ['Nam Duong', 'Dang Minh Dung', 'Trung Anh', 'Phan Thanh', 'Mai Cong Dat']
+    }, 
+    {
+        "id": 3, 
+        "Number": 7,
+        "Mem": ['Hung Thinh', 'Khac Quan', 'Trung Anh',
+                 'Van Vuong', 'Truong Thinh', 'Muoi Tran', 'Vo Anh Hung']
+    }, 
+    {
+        "id": 4, 
+        "Number": 3,
+        "Mem": ['Tuan Anh Hoang Cong', 'Nguyen Minh Thuan', 'Luyen']
+    }
+]
