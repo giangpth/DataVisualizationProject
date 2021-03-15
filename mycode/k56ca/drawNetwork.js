@@ -23,6 +23,15 @@ function drawNetwork(nodes, links)
     var chartsvg = d3.select("#mysvg")
     var width = chartsvg.node().getBoundingClientRect().width
     var height = chartsvg.node().getBoundingClientRect().height
+
+    chartsvg.append('g')
+        .append('text')
+        .text("Connection of 6 members with other classmates and closed groups of friends")
+        .attr('x', width/2)
+        .attr('y', 30)
+        .attr('text-anchor', 'middle')
+        .style("font-weight", "bold")
+        .attr("font-size","18px")
        
     var simulation = d3.forceSimulation(nodes)
         .force('charge', d3.forceManyBody().strength(-1300))
@@ -62,6 +71,7 @@ function drawNetwork(nodes, links)
             var matches = thisname.match(/\b(\w)/g);
             var tag = matches.join('');
             return tag})
+        .attr("font-size","13px")
     
 
 
@@ -112,6 +122,7 @@ function drawNetwork(nodes, links)
                     var tag = matches.join('');
                     return tag + ': ' + thisname;
                 })
+                .attr("font-size","13px")
     }
     
 
