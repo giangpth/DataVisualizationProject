@@ -25,8 +25,8 @@ function drawNetwork(nodes, links)
     var height = chartsvg.node().getBoundingClientRect().height
        
     var simulation = d3.forceSimulation(nodes)
-        .force('charge', d3.forceManyBody().strength(-3500))
-        .force('center', d3.forceCenter(width / 3, height / 2))
+        .force('charge', d3.forceManyBody().strength(-1300))
+        .force('center', d3.forceCenter(width / 3, height / 3.5))
         .force('link', d3.forceLink().links(links))
         .on('tick', ticked);
     
@@ -51,13 +51,17 @@ function drawNetwork(nodes, links)
 
 
     var circle = block.append('circle')
-                .attr('r', 30)
+                .attr('r', 20)
                 .attr('id', function(d){return d.Name.replace(/ /g,'')})
 
 
     var lable = block.append('text')
-        .attr('text-anchor', "start")
-        .text(function(d){return d.Name})
+        .attr('text-anchor', "middle")
+        .text(function(d){
+            var thisname = d.Name;
+            var matches = thisname.match(/\b(\w)/g);
+            var tag = matches.join('');
+            return tag})
     
 
 
@@ -71,7 +75,7 @@ function drawNetwork(nodes, links)
             .attr("cy", function(d) { return d.y; })
         lable
             .attr('dx', function(d) {return d.x})
-            .attr('dy', function(d) {return d.y})
+            .attr('dy', function(d) {return d.y + 3})
         
         link
             .attr("x1", function(d) { return d.source.x; })
@@ -80,20 +84,42 @@ function drawNetwork(nodes, links)
             .attr("y2", function(d) { return d.target.y; })
         // document.write('tick ')
     }    
-    // simulation.stop()
-    // simulation.tick()
-    // var selected = d3.select(["#HoangAnh").style('fill', 'red') 
-    // var giang = d3.select("#Giang").attr('r', 40) 
-    // var cong = d3.select("#DangMinhCong").attr('r', 40) 
-    // var nguyen = d3.select("#NgoDinhNguyen").attr('r', 40) 
-    // var quan = d3.select("#KhacQuan").attr('r', 40) 
-    // var thinh = d3.select("#HungThinh").attr('r', 40) 
+
+    var giang = d3.select("#Giang").style('fill', '#F17405') 
+    var cong = d3.select("#DangMinhCong").style('fill', '#F17405') 
+    var nguyen = d3.select("#NgoDinhNguyen").style('fill', '#F17405') 
+    var quan = d3.select("#KhacQuan").style('fill', '#F17405') 
+    var thinh = d3.select("#HungThinh").style('fill', '#F17405')
+    var tranh = d3.select("#TrungAnh").style('fill', '#F17405')
+    
+    //add legend 
+    chartsvg.append('g')
+            .append("rect")
+            .attr('x', width - 150 - 200)
+            .attr('y', 10)
+            .attr('width', 200)
+            .attr('height', function(){return nodes.length*20 + 10})
+    
+    for (var i = 0; i < nodes.length; i++)
+    {
+        chartsvg.append('text')
+                .attr('x', width - 150 - 200 + 10)
+                .attr('y', 30 + i*20)
+                .attr('text-anchor', "start")
+                .text(function(){
+                    var thisname = nodes[i].Name;
+                    var matches = thisname.match(/\b(\w)/g);
+                    var tag = matches.join('');
+                    return tag + ': ' + thisname;
+                })
+    }
+    
 
     d3.transition()
         .delay(10000)
         .on('start', repeat)
     
-   
+
     function repeat()
     {
         // document.write('Repeat')
@@ -110,13 +136,13 @@ function drawNetwork(nodes, links)
                     .transition()
                     .duration(1500)
                     .delay((i)*5000)
-                    .attr('r', 60)
+                    .attr('r', 35)
         
                 d3.select(memtag)
                     .transition()
                     .duration(2000)
                     .delay((i)*5000 + 1500)
-                    .attr('r', 30)
+                    .attr('r', 20)
                        
             }
             if (i == groups.length - 1)
