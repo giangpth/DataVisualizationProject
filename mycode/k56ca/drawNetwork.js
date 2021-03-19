@@ -33,11 +33,6 @@ function drawNetwork(nodes, links)
         .style("font-weight", "bold")
         .attr("font-size","18px")
        
-    var simulation = d3.forceSimulation(nodes)
-        .force('charge', d3.forceManyBody().strength(-1300))
-        .force('center', d3.forceCenter(width / 3, height / 3.5))
-        .force('link', d3.forceLink().links(links))
-        .on('tick', ticked);
     
     var link = chartsvg.append('g')
         .attr('class', 'links')
@@ -45,6 +40,7 @@ function drawNetwork(nodes, links)
         .data(links)
         .enter()
         .append('line')
+
 
     
     //create a group for node that will contain a circle and a lable
@@ -62,6 +58,17 @@ function drawNetwork(nodes, links)
     var circle = block.append('circle')
                 .attr('r', 20)
                 .attr('id', function(d){return d.Name.replace(/ /g,'')})
+                .attr('cx', 20)
+                .attr('cy', 20)
+
+    
+    var simulation = d3.forceSimulation(nodes)
+        .force('charge', d3.forceManyBody().strength(-1300))
+        .force('center', d3.forceCenter(width / 3, height / 3.5))
+        .force('link', d3.forceLink().links(links))
+        // .distanceMin(10)
+        .stop(); // stop the tick after finishing calculate the positionf for nodes and link
+        // .on('tick', ticked);
 
 
     var lable = block.append('text')
@@ -73,27 +80,39 @@ function drawNetwork(nodes, links)
             return tag})
         .attr("font-size","13px")
     
+    for (var i = 0, n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay())); i < n; ++i) {
+        simulation.tick(); // tick until finish calculating the final position of all nodes and links
+    }
+    // d3.timeout(function() {
+    //     // loading.remove();
+    //     for (var i = 0, n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay())); i < n; ++i) {
+    //         simulation.tick();
+    //     }
 
+    // function ticked()
+    // {
+    node
+        .attr("x", function(d) { return d.x; })
+        .attr("y", function(d) { return d.y; });
+    circle
+        .attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; })
+    lable
+        .attr('dx', function(d) {return d.x})
+        .attr('dy', function(d) {return d.y + 3})
+    
+    link
+        .attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; })
+        // .attr('id', function(d) {
+        //     var tarname = d.source.Name;
+        //     var desname = d.target.Name;
+        //     var tagid = "#" + tarname.replace(/ /g,'') + desname.replace(/ /g,'');
 
-    function ticked()
-    {
-        node
-            .attr("x", function(d) { return d.x; })
-            .attr("y", function(d) { return d.y; });
-        circle
-            .attr("cx", function(d) { return d.x; })
-            .attr("cy", function(d) { return d.y; })
-        lable
-            .attr('dx', function(d) {return d.x})
-            .attr('dy', function(d) {return d.y + 3})
-        
-        link
-            .attr("x1", function(d) { return d.source.x; })
-            .attr("y1", function(d) { return d.source.y; })
-            .attr("x2", function(d) { return d.target.x; })
-            .attr("y2", function(d) { return d.target.y; })
-        // document.write('tick ')
-    }    
+        // })
+    // }    
 
     var giang = d3.select("#Giang").style('fill', '#F17405') 
     var cong = d3.select("#DangMinhCong").style('fill', '#F17405') 
@@ -101,11 +120,13 @@ function drawNetwork(nodes, links)
     var quan = d3.select("#KhacQuan").style('fill', '#F17405') 
     var thinh = d3.select("#HungThinh").style('fill', '#F17405')
     var tranh = d3.select("#TrungAnh").style('fill', '#F17405')
+
+
     
     //add legend 
     chartsvg.append('g')
             .append("rect")
-            .attr('x', width - 150 - 200)
+            .attr('x', width - 200)
             .attr('y', 10)
             .attr('width', 200)
             .attr('height', function(){return nodes.length*20 + 10})
@@ -113,7 +134,7 @@ function drawNetwork(nodes, links)
     for (var i = 0; i < nodes.length; i++)
     {
         chartsvg.append('text')
-                .attr('x', width - 150 - 200 + 10)
+                .attr('x', width - 200 + 10)
                 .attr('y', 30 + i*20)
                 .attr('text-anchor', "start")
                 .text(function(){
@@ -124,20 +145,82 @@ function drawNetwork(nodes, links)
                 })
                 .attr("font-size","13px")
     }
+
+    //draw the link among members in a group
+    var grouppath = []
+    for (var i = 0; i < groups.length; i++)
+    {
+        var num = groups[i].Number
+
+        var points = []
+
+        for (var j = 0; j < num; j++)
+        {
+            var memname = groups[i].Mem[j];
+            var memtag = "#"
+            memtag += memname.replace(/ /g,'')
+            var x = d3.select(memtag).attr('cx')
+            var y = d3.select(memtag).attr('cy')
+            points.push([x, y]);
+        }
+        var memname = groups[i].Mem[0];
+        var memtag = "#"
+        memtag += memname.replace(/ /g,'')
+        var x = d3.select(memtag).attr('cx')
+        var y = d3.select(memtag).attr('cy')
+        points.push([x, y]);
+        grouppath.push(points)
+    }
     
+    var elepaths = []
+    for (var i = 0; i < grouppath.length; i++)
+    {
+        var idtag = "#path" + i.toString();
+        // document.write(idtag)
+        var lineFunction = d3.line()
+                            .x(function(d){return d[0];})
+                            .y(function(d){return d[1];})
+                            .curve(d3.curveMonotoneX);
+
+        var thispath = chartsvg.append('g')
+                .append("path")
+                .attr("d", lineFunction(grouppath[i]))
+                .attr("stroke", "red")
+                .attr("stroke-width", 2)
+                .attr("id", idtag)
+                .attr("fill", "none")
+                .attr("opacity", "0.0")
+        
+        elepaths.push(thispath)
+    }
+    // var path = d3.select("#path1")
+    //                 .attr("opacity", "1.0")
+    document.write(elepaths.length)
+
 
     d3.transition()
-        .delay(10000)
+        .delay(1000)
         .on('start', repeat)
     
 
     function repeat()
     {
-        // document.write('Repeat')
         for (var i = 0; i < groups.length; i++)
         {
+            gpath = elepaths[i];
+
+            gpath.transition()
+                .duration(1500)
+                .delay(i*5000)
+                .attr('opacity', "1.0")
+            
+            gpath.transition()
+                .duration(1500)
+                .delay(i*5000 + 1500)
+                .attr("opacity", "0.0")
+
             var num = groups[i].Number
-            // document.write(num)
+
             for (var j = 0; j < num; j++)
             {
                 var memname = groups[i].Mem[j];
@@ -154,8 +237,9 @@ function drawNetwork(nodes, links)
                     .duration(2000)
                     .delay((i)*5000 + 1500)
                     .attr('r', 20)
-                       
+                
             }
+            
             if (i == groups.length - 1)
             {
                 d3.transition()
