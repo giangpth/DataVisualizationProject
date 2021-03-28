@@ -117,14 +117,14 @@
                 var rect = d3.select(this)
 
                 var rectBox = d3.select(this).node().getBoundingClientRect();
-                var deltaX =0;
+                var deltaX = 0;
                 var visual_proxy = [
                   [rectBox.x + deltaX, rectBox.y + rectBox.height],
                   [rectBox.x + rectBox.width * 0.5 + deltaX, rectBox.y + rectBox.height - 13],
                   [rectBox.x + rectBox.width + deltaX, rectBox.y + rectBox.height],
-                  [rectBox.x + rectBox.width + deltaX, rectBox.y + rectBox.height + 10],
-                  [rectBox.x + rectBox.width * 0.5 + deltaX, rectBox.y + rectBox.height-3],
-                  [rectBox.x + deltaX, rectBox.y + rectBox.height + 10],
+                  [rectBox.x + rectBox.width + deltaX, rectBox.y + rectBox.height],
+                  [rectBox.x + rectBox.width * 0.5 + deltaX, rectBox.y + rectBox.height],
+                  [rectBox.x + deltaX, rectBox.y + rectBox.height],
                   [rectBox.x + deltaX, rectBox.y + rectBox.height],
                   ]
                   

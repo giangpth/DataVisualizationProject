@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="utf-8">
+        <!-- 1. Download V4 version of D3-->
+        <script src = "../../lib/d3.js"></script>
+        <script src = "../../lib/fisheye.js"></script>
+        <script src = "../../src/gd.js"></script>
+    </head>
+
+    <style>
+        circle
+        {
+            fill: #FABF56;
+        }
+        line 
+        {
+            stroke: #aaa;
+        }
+        text 
+        {
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+            fill: rgb(206, 55, 17);
+        }
+        rect 
+        {
+            fill: none;
+            stroke: #30C8F8;
+        }
+        div
+        {
+            border: 3px solid white;
+        }
+    </style>
+
+    <body>
+        <script type="text/javascript" src="k56cadata.js"></script>
+        <script type="text/javascript" src="drawk56network.js"></script>
+        
+        <div id = 'graphdiv' style="background-color:#EDEDED;">
+            
+            <svg id = 'graphsvg' width = '100%' height = '800'>
+                <g class="links"></g>
+                <g class="nodes"></g>
+            </svg>
+            <svg id = 'expsvg' width = '100%' height = '150'>
+
+            </svg>
+            
+        </div>
+
+        <script>
+            drawGraph(nodes, links)
+            explainNetwork()
+        </script>
+    </body>
+</html>
+

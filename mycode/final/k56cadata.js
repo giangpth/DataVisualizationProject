@@ -3,7 +3,7 @@ var nodes =
     {
       "Name": "Giang",
       "index": 0,
-      "Group": [],
+      "Group": [0, 1],
     },
     {
       "Name": "Mai Cong Dat",
@@ -16,9 +16,9 @@ var nodes =
       "Group": [],
     },
     {
-      "Name": "Hoang Anh",
+      "Name": "Dang Minh Dung",
       "index": 3,
-      "Group": [],
+      "Group": [2],
     },
     {
       "Name": "Chu Van Tao",
@@ -28,17 +28,17 @@ var nodes =
     {
       "Name": "Trung Anh",
       "index": 5,
-      "Group": [],
+      "Group": [0, 2, 3],
     },
     {
       "Name": "Khac Quan",
       "index": 6,
-      "Group": [],
+      "Group": [3],
     },
     {
       "Name": "Luyen",
       "index": 7,
-      "Group": [],
+      "Group": [4],
     },
     {
       "Name": "Vu Minh Hai",
@@ -48,12 +48,12 @@ var nodes =
     {
       "Name": "Muoi Tran",
       "index": 9,
-      "Group": [],
+      "Group": [3],
     },
     {
       "Name": "Nam Duong",
       "index": 10,
-      "Group": [],
+      "Group": [2],
     },
     {
       "Name": "Bao Trung",
@@ -63,22 +63,22 @@ var nodes =
     {
       "Name": "Ngo Dinh Nguyen",
       "index": 12,
-      "Group": [],
+      "Group": [0],
     },
     {
-      "Name":  "Dang Minh Dung",
+      "Name":  "Hoang Anh",
       "index": 13,
       "Group": [],
     },
     {
       "Name": "Hung Thinh",
       "index": 14,
-      "Group": [],
+      "Group": [3],
     },
     {
       "Name": "Truong Thinh",
       "index": 15,
-      "Group": [],
+      "Group": [3],
     },
     {
       "Name": "Nguyen Van Dai",
@@ -88,7 +88,7 @@ var nodes =
     {
       "Name": "Phan Thanh",
       "index": 17,
-      "Group": [],
+      "Group": [2],
     },
     {
       "Name": "Ngo Minh Son",
@@ -98,12 +98,12 @@ var nodes =
     {
       "Name": "Nguyen Minh Thuan",
       "index": 19,
-      "Group": [],
+      "Group": [4],
     },
     {
       "Name": "Tuan Anh Hoang Cong",
       "index": 20,
-      "Group": [],
+      "Group": [4],
     },
     {
       "Name": "Tuan Anh Nguyen",
@@ -118,12 +118,12 @@ var nodes =
     {
       "Name": "Vo Anh Hung",
       "index": 23,
-      "Group": [],
+      "Group": [3],
     },
     {
       "Name": "Van Vuong",
       "index": 24,
-      "Group": [],
+      "Group": [3],
     },
     {
       "Name": "Yen Vu",
@@ -133,7 +133,7 @@ var nodes =
     {
       "Name": "Dang Minh Cong",
       "index": 26,
-      "Group": [],
+      "Group": [1],
     },
     {
       "Name": "Nguyen Dinh Dung",
@@ -766,15 +766,13 @@ var groups =
     {
         "id": 2, 
         "Number": 5,
-        "Mem": ['Nam Duong', 'Dang Minh Dung', 'Trung Anh', 
-                'Phan Thanh', 'Mai Cong Dat']
+        "Mem": ['Nam Duong', 'Dang Minh Dung', 'Trung Anh', 'Phan Thanh', 'Mai Cong Dat']
     }, 
     {
         "id": 3, 
         "Number": 7,
         "Mem": ['Hung Thinh', 'Khac Quan', 'Trung Anh',
-                 'Van Vuong', 'Truong Thinh', 'Muoi Tran', 
-                 'Vo Anh Hung']
+                 'Van Vuong', 'Truong Thinh', 'Muoi Tran', 'Vo Anh Hung']
     }, 
     {
         "id": 4, 

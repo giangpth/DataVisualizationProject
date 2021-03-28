@@ -42,7 +42,7 @@ function drawNetwork(nodes, links)
         .append('line')
 
 
-    
+    //  
     //create a group for node that will contain a circle and a lable
     var node = chartsvg.selectAll('g')
                         .attr('class', 'nodes')
@@ -63,10 +63,9 @@ function drawNetwork(nodes, links)
 
     
     var simulation = d3.forceSimulation(nodes)
-        .force('charge', d3.forceManyBody().strength(-1300))
+        .force('charge', d3.forceManyBody().strength(-2000))
         .force('center', d3.forceCenter(width / 3, height / 3.5))
         .force('link', d3.forceLink().links(links))
-        // .distanceMin(10)
         .stop(); // stop the tick after finishing calculate the positionf for nodes and link
         // .on('tick', ticked);
 
@@ -110,7 +109,7 @@ function drawNetwork(nodes, links)
         //     var tarname = d.source.Name;
         //     var desname = d.target.Name;
         //     var tagid = "#" + tarname.replace(/ /g,'') + desname.replace(/ /g,'');
-
+        //     document.write(tagid)
         // })
     // }    
 
@@ -186,7 +185,7 @@ function drawNetwork(nodes, links)
                 .append("path")
                 .attr("d", lineFunction(grouppath[i]))
                 .attr("stroke", "red")
-                .attr("stroke-width", 2)
+                .attr("stroke-width", 3)
                 .attr("id", idtag)
                 .attr("fill", "none")
                 .attr("opacity", "0.0")
