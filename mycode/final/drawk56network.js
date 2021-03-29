@@ -138,86 +138,88 @@ function drawGraph(nodes, links)
     }
     function showGroup()
     {
-        isAnimating = true;
-        var cirid = d3.select(this).attr('id')
-        // console.log(cirid)
-        var nodeid = "#node" + cirid
-        var thisnode = d3.select(nodeid)
-        var thisid = thisnode.attr('index')
-        var groupids = nodes[thisid].Group
-        // console.log(groupids)
-
-        for (var i = 0; i < groupids.length; i++)
+        if (!isAnimating)
         {
-            var groupid = groupids[i]
-            var num = groups[groupid].Number // get number of member of this group
-            var points = [] //to store all the points of the group path
+            isAnimating = true;
+            var cirid = d3.select(this).attr('id')
+            // console.log(cirid)
+            var nodeid = "#node" + cirid
+            var thisnode = d3.select(nodeid)
+            var thisid = thisnode.attr('index')
+            var groupids = nodes[thisid].Group
+            // console.log(groupids)
 
-            for(var k = 0; k < num; k++)
+            for (var i = 0; i < groupids.length; i++)
             {
-                var memname = groups[groupid].Mem[k];
-                var memtag = "#" + memname.replace(/ /g,'')
+                var groupid = groupids[i]
+                var num = groups[groupid].Number // get number of member of this group
+                var points = [] //to store all the points of the group path
+
+                for(var k = 0; k < num; k++)
+                {
+                    var memname = groups[groupid].Mem[k];
+                    var memtag = "#" + memname.replace(/ /g,'')
+                    var memx = d3.select(memtag).attr('cx')
+                    var memy = d3.select(memtag).attr('cy')
+                    points.push([memx, memy]);
+                }
+                var memname = groups[groupid].Mem[0]
+                var memtag = "#"
+                memtag += memname.replace(/ /g,'')
                 var memx = d3.select(memtag).attr('cx')
                 var memy = d3.select(memtag).attr('cy')
                 points.push([memx, memy]);
+                
+                var lineFunction = d3.line()
+                                    .x(function(d){return d[0];})
+                                    .y(function(d){return d[1];})
+                                    .curve(d3.curveMonotoneX);
+                
+                var gpath = graphsvg.append("path")
+                                    .attr("d", lineFunction(points))
+                                    .attr("stroke", "red")
+                                    .attr("stroke-width", 3)
+                                    .attr("fill", "none")
+                                    .attr("opacity", "0.0")                    
+                
+                gpath.transition()
+                    .duration(3000)
+                    .delay(i*6000)
+                    .attr('opacity', "1.0")
+                
+                gpath.transition()
+                    .duration(3000)
+                    .delay(i*6000 + 3000)
+                    .attr("opacity", "0.0")
+                var num = groups[groupid].Number
+        
+                for(var j = 0; j < num; j++)
+                {
+                    var memname = groups[groupid].Mem[j];
+                        var memtag = "#"
+                        memtag += memname.replace(/ /g,'')
+                        d3.select(memtag)
+                            .transition()
+                            .duration(3000)
+                            .delay((i)*6000)
+                            .attr('r', 35)
+                
+                        d3.select(memtag)
+                            .transition()
+                            .duration(3000)
+                            .delay((i)*6000 + 3000)
+                            .attr('r', 20)
+                }
+                
             }
-            var memname = groups[groupid].Mem[0]
-            var memtag = "#"
-            memtag += memname.replace(/ /g,'')
-            var memx = d3.select(memtag).attr('cx')
-            var memy = d3.select(memtag).attr('cy')
-            points.push([memx, memy]);
-            
-            var lineFunction = d3.line()
-                                .x(function(d){return d[0];})
-                                .y(function(d){return d[1];})
-                                .curve(d3.curveMonotoneX);
-            
-            var gpath = graphsvg.append("path")
-                                .attr("d", lineFunction(points))
-                                .attr("stroke", "red")
-                                .attr("stroke-width", 3)
-                                .attr("fill", "none")
-                                .attr("opacity", "0.0")                    
-            
-            gpath.transition()
-                .duration(3000)
-                .delay(i*6000)
-                .attr('opacity', "1.0")
-            
-            gpath.transition()
-                .duration(3000)
-                .delay(i*6000 + 3000)
-                .attr("opacity", "0.0")
-            var num = groups[groupid].Number
-    
-            for(var j = 0; j < num; j++)
+            setTimeout(endofanimation, 6000*groupids.length)
+            function endofanimation()
             {
-                var memname = groups[groupid].Mem[j];
-                    var memtag = "#"
-                    memtag += memname.replace(/ /g,'')
-                    d3.select(memtag)
-                        .transition()
-                        .duration(3000)
-                        .delay((i)*6000)
-                        .attr('r', 35)
-            
-                    d3.select(memtag)
-                        .transition()
-                        .duration(3000)
-                        .delay((i)*6000 + 3000)
-                        .attr('r', 20)
+                isAnimating = false;
+                console.log('Animation finish')
+                d3.select("#graphsvg").selectAll('path').remove()
             }
-            
         }
-        setTimeout(endofanimation, 6000*groupids.length)
-        function endofanimation()
-        {
-            isAnimating = false;
-            console.log('Animation finish')
-            d3.select("#graphsvg").selectAll('path').remove()
-        }
-
     }
 
     function dragged(d)
