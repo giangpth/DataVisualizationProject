@@ -46,6 +46,7 @@
 		//3. set MA info
         var deltaX = 0
 		var rectBox = document.getElementById('rect1').getBoundingClientRect();
+        console.log (rectBox)
 		var visual_proxy = [
 			[rectBox.x + deltaX, rectBox.y + rectBox.height],
             [rectBox.x + rectBox.width * 0.5 + deltaX, rectBox.y + rectBox.height - 13],
@@ -55,18 +56,20 @@
 			[rectBox.x + deltaX, rectBox.y + rectBox.height + 10],
 			[rectBox.x + deltaX, rectBox.y + rectBox.height],
 		]
+        console.log(visual_proxy)
 		var path = [
 			[rectBox.x + rectBox.width * 0.5 , rectBox.y + rectBox.height],
 			[rectBox.x + rectBox.width * 0.5 , rectBox.y]
 		]
+        console.log(path)
 		console.log(' visual_proxy ', visual_proxy, 'path', path);
 
 		var boundary = [
-			[rectBox.x, rectBox.y], 
-			[rectBox.x + rectBox.width, rectBox.y], 
-			[rectBox.x + rectBox.width, rectBox.y + rectBox.height],
-			[rectBox.x, rectBox.y + rectBox.height],
-			[rectBox.x, rectBox.y], 
+			[rectBox.x + deltaX, rectBox.y], 
+			[rectBox.x + rectBox.width + deltaX, rectBox.y], 
+			[rectBox.x + rectBox.width + deltaX, rectBox.y + rectBox.height],
+			[rectBox.x + deltaX, rectBox.y + rectBox.height],
+			[rectBox.x + deltaX, rectBox.y], 
 		]
 
         var rectBox2 = document.getElementById('rect2').getBoundingClientRect();

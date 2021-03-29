@@ -8,7 +8,7 @@ var nodes =
     {
       "Name": "Mai Cong Dat",
       "index": 1,
-      "Group": [],
+      "Group": [2],
     },
     {
       "Name": "Bao Loc",

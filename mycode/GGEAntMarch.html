@@ -119,14 +119,13 @@
                 var rectBox = d3.select(this).node().getBoundingClientRect();
                 var deltaX = 0;
                 var visual_proxy = [
-                  [rectBox.x + deltaX, rectBox.y + rectBox.height],
-                  [rectBox.x + rectBox.width * 0.5 + deltaX, rectBox.y + rectBox.height - 13],
-                  [rectBox.x + rectBox.width + deltaX, rectBox.y + rectBox.height],
-                  [rectBox.x + rectBox.width + deltaX, rectBox.y + rectBox.height],
-                  [rectBox.x + rectBox.width * 0.5 + deltaX, rectBox.y + rectBox.height],
-                  [rectBox.x + deltaX, rectBox.y + rectBox.height],
-                  [rectBox.x + deltaX, rectBox.y + rectBox.height],
-                  ]
+                        [rectBox.x - deltaX, rectBox.y + rectBox.height],
+                        [rectBox.x + rectBox.width * 0.5 + deltaX, rectBox.y + rectBox.height - 13],
+                        [rectBox.x + rectBox.width + deltaX, rectBox.y + rectBox.height],
+                        [rectBox.x + rectBox.width + deltaX, rectBox.y + rectBox.height+10],
+                        [rectBox.x + rectBox.width * 0.5 + deltaX, rectBox.y + rectBox.height-3],
+                        [rectBox.x - deltaX, rectBox.y + rectBox.height+10],
+                        [rectBox.x - deltaX, rectBox.y + rectBox.height]]
                   
                 var path = [
                   [rectBox.x + rectBox.width * 0.5 , rectBox.y + rectBox.height],
@@ -144,7 +143,8 @@
                 var population = Math.floor(ggeData[i].GGE/ggeData[i].GGEPC)
                 var space = Math.floor(300/population)
                 var color = '#F9DEB3'        
-                marchingAnt(visual_proxy, path, boundary, speed, space, color)
+                marchingAnt(visual_proxy, 
+                path, boundary, speed, space, color)
           })
         MA_End();
 

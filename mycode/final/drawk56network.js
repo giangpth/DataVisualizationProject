@@ -93,12 +93,12 @@ function drawGraph(nodes, links)
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; })
 
-    var giang = d3.select("#Giang").style('fill', '#F17405') 
-    var cong = d3.select("#DangMinhCong").style('fill', '#F17405') 
-    var nguyen = d3.select("#NgoDinhNguyen").style('fill', '#F17405') 
-    var quan = d3.select("#KhacQuan").style('fill', '#F17405') 
-    var thinh = d3.select("#HungThinh").style('fill', '#F17405')
-    var tranh = d3.select("#TrungAnh").style('fill', '#F17405')
+    var giang = d3.select("#Giang").style('fill', '#fc9d62') 
+    var cong = d3.select("#DangMinhCong").style('fill', '#fc9d62') 
+    var nguyen = d3.select("#NgoDinhNguyen").style('fill', '#fc9d62') 
+    var quan = d3.select("#KhacQuan").style('fill', '#fc9d62') 
+    var thinh = d3.select("#HungThinh").style('fill', '#fc9d62')
+    var tranh = d3.select("#TrungAnh").style('fill', '#fc9d62')
 
     d3.selectAll('circle')
         .on('mouseover', showName)
@@ -121,7 +121,7 @@ function drawGraph(nodes, links)
 
         var nodeid = "#node"+cirid
         var thisnode = d3.select(nodeid)
-        // console.log(thisnode.attr('Name'))
+        console.log(thisnode.attr('Name'))
         graphsvg.append('text')
                 .attr('x', cx)
                 .attr('y', cy - 20)
@@ -215,7 +215,7 @@ function drawGraph(nodes, links)
         {
             isAnimating = false;
             console.log('Animation finish')
-            d3.selectAll('path').remove()
+            d3.select("#graphsvg").selectAll('path').remove()
         }
 
     }
@@ -242,7 +242,7 @@ function drawGraph(nodes, links)
     }
     graphsvg.append('text')
             .attr('x', gwidth/2)
-            .attr('y', 30)
+            .attr('y', 40)
             .attr('text-anchor', 'middle')
             .attr('font-size', '30')
             .text('Connections on Facebook of 6 members in the class with other classmates')
